@@ -1,7 +1,19 @@
+import pytest
+import numpy as np
+from aegis.zeta_flux.reverse_period.meta.ensemble import MetaEnsemble
+
+def generate_stalled_distribution(bars=20, volatility=0.3):
+    """Generate synthetic regime: bars of distribution-without-expansion (stalled)"""
+    # Mocking stalled signal as small values
+    return [0.1 for _ in range(bars)]
+
+def generate_displacement(atr_multiple=2.5):
+    """Generate displacement tick"""
+    return {'type': 'displacement', 'value': atr_multiple}
+
 @pytest.mark.slow
 def test_reverse_period_recovery():
     """Full pipeline: synthetic chop → reverse detected → displacement → normal"""
-    from reverse_period.meta.ensemble import MetaEnsemble
     
     # Generate synthetic regime: 20 bars of distribution-without-expansion
     synthetic = generate_stalled_distribution(bars=20, volatility=0.3)
