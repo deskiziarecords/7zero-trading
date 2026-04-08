@@ -108,4 +108,8 @@ class AdelicTube:
             return 'ACCUMULATION'
         
         # Manipulation: Sharp move + volume spike
-        price_chg = abs(df20[-1, 3] - df20[-2, 3]) / df20[-2,
+        price_chg = abs(df20[-1, 3] - df20[-2, 3]) / (df20[-2, 3] + 1e-10)
+        if price_chg > 0.001:
+            return 'MANIPULATION'
+
+        return 'DISTRIBUTION'
